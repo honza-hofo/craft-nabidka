@@ -1,18 +1,174 @@
-<html><head><meta charset="utf-8"><style>
-body{font-family:Arial,Helvetica,sans-serif;max-width:900px;margin:24px auto;color:#1a2233}
-h1{font-size:26px}h2{background:#3b46d6;color:#fff;padding:10px 14px;border-radius:8px;font-size:19px}
-.den{border:1px solid #e2e5ee;border-radius:8px;margin:10px 0;padding:10px 14px}
-.head{font-weight:bold;display:flex;justify-content:space-between}
-.route{color:#5a6b8c;font-size:13px;margin:6px 0}
-table{width:100%;border-collapse:collapse;font-size:13px}td,th{text-align:left;padding:4px 6px;border-bottom:1px solid #eef}
-.warn{color:#b23}.sum{background:#eef1fb;padding:12px 16px;border-radius:8px;margin:12px 0}
-</style></head><body>
-<h1>Cenová nabídka — rozvoz Craft prodejen (3 auta souběžně, 14denní cyklus)</h1>
-<div class="sum"><b>34 auto-dní · 252 prodejen · 21 278 km · 282 115 Kč bez DPH</b><br>3 auta souběžně → hotovo za ~12 kalendářních dní.<br>Depo Hodonín · 1 auto = max 81 bedniček / 13 prodejen (bednička 14.79 kg). Ceny vzorcem 4167 Kč + 6.6 Kč/km.</div>
-<h2>Auto 1 — východ (Morava a Slezsko) &nbsp;—&nbsp; 11 dní · 4 488 km · 75 460 Kč</h2>
-<div class="den"><div class="head"><span>den 1 · 13 prodejen · 422 km · ⏱ 12.5 h</span><span>6 952 Kč</span></div>
-<div class="route">🚚 Hodonín → Ostrava → Bohumín → Orlová → Havířov → Karviná → Hodonín 🏠</div>
-<table><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr>
+<!DOCTYPE html>
+<html lang="cs"><head><meta charset="utf-8">
+<title>Cenová nabídka — rozvoz Craft prodejen</title>
+<style>
+* { box-sizing: border-box; }
+@page { size: A4; margin: 15mm; }
+body {
+  font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  max-width: 210mm;
+  margin: 24px auto;
+  padding: 0 20px;
+  color: #1c2433;
+  background: #f5f6f8;
+  line-height: 1.5;
+}
+.page-inner { background: white; padding: 32px 40px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+
+/* Hlavička */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 24px;
+  border-bottom: 3px solid #0f172a;
+  margin-bottom: 32px;
+}
+.header-left h1 { font-size: 26px; margin: 0 0 6px; color: #0f172a; letter-spacing: -0.02em; font-weight: 700; }
+.header-left .sub { color: #64748b; font-size: 14px; }
+.header-left .datum { color: #94a3b8; font-size: 12px; margin-top: 4px; }
+.logo-slot {
+  width: 160px; height: 70px;
+  border: 2px dashed #cbd5e1;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  color: #94a3b8; font-size: 12px; text-align: center; padding: 6px;
+  background: #fafbfc;
+}
+/* Až budeš mít logo, nahraď .logo-slot za: <img src="logo.png" style="max-width:160px;max-height:70px;"> */
+
+/* Souhrnný panel */
+.summary {
+  background: linear-gradient(135deg, #1d4ed8 0%, #3b46d6 100%);
+  color: white;
+  padding: 24px 28px;
+  border-radius: 10px;
+  margin-bottom: 32px;
+  page-break-inside: avoid;
+}
+.summary-title { font-size: 13px; opacity: 0.85; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+.summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 12px; }
+.summary-item { text-align: left; }
+.summary-item .n { font-size: 28px; font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; }
+.summary-item .l { font-size: 12px; opacity: 0.85; margin-top: 4px; }
+.summary-cena { border-top: 1px solid rgba(255,255,255,0.25); padding-top: 14px; margin-top: 16px; font-size: 14px; opacity: 0.9; }
+.summary-cena strong { font-size: 22px; opacity: 1; }
+
+/* Auto sekce */
+.auto-section { margin-bottom: 32px; page-break-inside: auto; }
+.auto-header {
+  color: white;
+  padding: 14px 18px;
+  border-radius: 8px 8px 0 0;
+  font-weight: 600;
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  page-break-after: avoid;
+}
+.auto-header .name { flex: 1; }
+.auto-header .stats { font-size: 13px; font-weight: 500; opacity: 0.95; margin-left: 16px; }
+.auto-body { border: 1px solid #e2e8f0; border-top: none; border-radius: 0 0 8px 8px; padding: 12px 16px; background: white; }
+
+/* Jednotlivý den */
+.den {
+  border: 1px solid #e4e7ec;
+  border-radius: 6px;
+  margin: 10px 0;
+  padding: 12px 14px;
+  page-break-inside: avoid;
+}
+.den-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  color: #0f172a;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+.den-head .price { color: #1d4ed8; font-weight: 700; font-size: 15px; }
+.den-route {
+  color: #64748b;
+  font-size: 12.5px;
+  background: #f8fafc;
+  padding: 6px 10px;
+  border-radius: 4px;
+  margin: 4px 0 10px;
+}
+.warn { color: #dc2626; font-weight: 600; margin-left: 6px; }
+.den table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+  margin-top: 6px;
+}
+.den th { background: #f1f5f9; color: #334155; text-align: left; padding: 5px 8px; border-bottom: 1px solid #cbd5e1; font-weight: 600; }
+.den td { padding: 4px 8px; border-bottom: 1px solid #f1f5f9; }
+.den tr:last-child td { border-bottom: none; }
+
+/* Poznámky */
+.notes {
+  background: #fffbeb;
+  border-left: 4px solid #f59e0b;
+  padding: 18px 22px;
+  border-radius: 6px;
+  margin-top: 32px;
+  font-size: 13px;
+  color: #78350f;
+  line-height: 1.75;
+  page-break-inside: avoid;
+}
+.notes h3 { margin: 0 0 8px; color: #78350f; font-size: 14px; }
+.notes ul { margin: 0; padding-left: 20px; }
+
+/* Patička */
+.footer {
+  margin-top: 28px;
+  padding-top: 18px;
+  border-top: 1px solid #e2e8f0;
+  color: #94a3b8;
+  font-size: 11px;
+  text-align: center;
+}
+
+/* Tisk */
+@media print {
+  body { background: white; margin: 0; padding: 0; max-width: none; }
+  .page-inner { box-shadow: none; padding: 0; border-radius: 0; }
+  .summary { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .auto-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+</style></head>
+<body>
+<div class="page-inner">
+
+<div class="header">
+  <div class="header-left">
+    <h1>Cenová nabídka — rozvoz Craft prodejen</h1>
+    <div class="sub">Kompletní distribuce · depo Hodonín · pravidelný rozvoz</div>
+    <div class="datum">Vystaveno: 06. 07. 2026</div>
+  </div>
+  <div class="logo-slot">Sem vložit<br>logo (max 160×70 px)</div>
+</div>
+<div class="summary">
+  <div class="summary-title">Souhrn nabídky</div>
+  <div class="summary-grid">
+    <div class="summary-item"><div class="n">252</div><div class="l">prodejen v ČR</div></div>
+    <div class="summary-item"><div class="n">34</div><div class="l">auto-dní práce</div></div>
+    <div class="summary-item"><div class="n">~12</div><div class="l">kalendářních dní (3 auta)</div></div>
+    <div class="summary-item"><div class="n">21 278</div><div class="l">km celkem</div></div>
+  </div>
+  <div class="summary-cena">Celková cena za rozvoz: <strong>282 115 Kč</strong> (bez DPH)</div>
+</div>
+<div class="auto-section">
+<div class="auto-header" style="background:#1d4ed8;"><span class="name">Auto 1 — východ (Morava a Slezsko)</span><span class="stats">11 dní · 4 488 km · 75 460 Kč</span></div>
+<div class="auto-body">
+<div class="den">
+<div class="den-head"><span>Den 1 · 13 prodejen · 422 km · ⏱ 12.5 h</span><span class="price">6 952 Kč</span></div>
+<div class="den-route">🚚 Hodonín → Ostrava → Bohumín → Orlová → Havířov → Karviná → Hodonín 🏠</div>
+<table><thead><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr></thead><tbody>
 <tr><td>1</td><td>189</td><td>189 AH OSTRAVA</td></tr>
 <tr><td>2</td><td>808</td><td>808 AH OSTRAVA</td></tr>
 <tr><td>3</td><td>467</td><td>467 A OSTRAVA </td></tr>
@@ -26,10 +182,11 @@ table{width:100%;border-collapse:collapse;font-size:13px}td,th{text-align:left;p
 <tr><td>11</td><td>683</td><td>683 AH ORLOVÁ</td></tr>
 <tr><td>12</td><td>390</td><td>390 A HAVÍŘOV</td></tr>
 <tr><td>13</td><td>686</td><td>686 AH KARVINÁ</td></tr>
-</table></div>
-<div class="den"><div class="head"><span>den 2 · 12 prodejen · 506 km · ⏱ 13.2 h</span><span>7 508 Kč</span></div>
-<div class="route">🚚 Hodonín → Rožnov Pod Radhoštěm → Frenštát Pod Radhoštěm → Frýdlant Nad Ostravicí → Frýdek-Místek → Ostrava Futurum → Ostrava Poruba → Nový Jičín → Třinec → Jablunkov → Hodonín 🏠</div>
-<table><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr>
+</tbody></table></div>
+<div class="den">
+<div class="den-head"><span>Den 2 · 12 prodejen · 506 km · ⏱ 13.2 h</span><span class="price">7 508 Kč</span></div>
+<div class="den-route">🚚 Hodonín → Rožnov Pod Radhoštěm → Frenštát Pod Radhoštěm → Frýdlant Nad Ostravicí → Frýdek-Místek → Ostrava Futurum → Ostrava Poruba → Nový Jičín → Třinec → Jablunkov → Hodonín 🏠</div>
+<table><thead><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr></thead><tbody>
 <tr><td>1</td><td>370</td><td>370 A ROŽNOV POD RADHOŠTĚM</td></tr>
 <tr><td>2</td><td>398</td><td>398 A FRENŠTÁT POD RADHOŠTĚM</td></tr>
 <tr><td>3</td><td>724</td><td>724 A FRÝDLANT NAD OSTRAVICÍ - OMMA</td></tr>
@@ -42,10 +199,11 @@ table{width:100%;border-collapse:collapse;font-size:13px}td,th{text-align:left;p
 <tr><td>10</td><td>395</td><td>395 ASM NOVÝ JIČÍN</td></tr>
 <tr><td>11</td><td>672</td><td>672 AH TŘINEC</td></tr>
 <tr><td>12</td><td>428</td><td>428 A JABLUNKOV</td></tr>
-</table></div>
-<div class="den"><div class="head"><span>den 3 · 9 prodejen · 493 km · ⏱ 11.5 h</span><span>7 421 Kč</span></div>
-<div class="route">🚚 Hodonín → Přerov → Lipník Nad Bečvou → Hranice → Bystřice Pod Hostýnem → Opava → Hlučín → Krnov → Hodonín 🏠</div>
-<table><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr>
+</tbody></table></div>
+<div class="den">
+<div class="den-head"><span>Den 3 · 9 prodejen · 493 km · ⏱ 11.5 h</span><span class="price">7 421 Kč</span></div>
+<div class="den-route">🚚 Hodonín → Přerov → Lipník Nad Bečvou → Hranice → Bystřice Pod Hostýnem → Opava → Hlučín → Krnov → Hodonín 🏠</div>
+<table><thead><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr></thead><tbody>
 <tr><td>1</td><td>678</td><td>678 AH PŘEROV</td></tr>
 <tr><td>2</td><td>134</td><td>134 A LIPNÍK NAD BEČVOU</td></tr>
 <tr><td>3</td><td>685</td><td>685 AH HRANICE</td></tr>
@@ -55,10 +213,11 @@ table{width:100%;border-collapse:collapse;font-size:13px}td,th{text-align:left;p
 <tr><td>7</td><td>353</td><td>353 AH OPAVA</td></tr>
 <tr><td>8</td><td>462</td><td>462 A HLUČÍN</td></tr>
 <tr><td>9</td><td>349</td><td>349 AH KRNOV</td></tr>
-</table></div>
-<div class="den"><div class="head"><span>den 4 · 13 prodejen · 371 km · ⏱ 11.8 h</span><span>6 613 Kč</span></div>
-<div class="route">🚚 Hodonín → Kunovice → Uherské Hradiště → Staré Město → Otrokovice → Zlín Malenovice → Zlín → Holešov → Kroměříž → Kojetín → Vyškov → Vizovice → Vsetín → Hodonín 🏠</div>
-<table><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr>
+</tbody></table></div>
+<div class="den">
+<div class="den-head"><span>Den 4 · 13 prodejen · 371 km · ⏱ 11.8 h</span><span class="price">6 613 Kč</span></div>
+<div class="den-route">🚚 Hodonín → Kunovice → Uherské Hradiště → Staré Město → Otrokovice → Zlín Malenovice → Zlín → Holešov → Kroměříž → Kojetín → Vyškov → Vizovice → Vsetín → Hodonín 🏠</div>
+<table><thead><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr></thead><tbody>
 <tr><td>1</td><td>675</td><td>675 AH KUNOVICE</td></tr>
 <tr><td>2</td><td>112</td><td>112 A UHERSKÉ HRADIŠTĚ</td></tr>
 <tr><td>3</td><td>811</td><td>811 AH STARÉ MĚSTO</td></tr>
@@ -72,10 +231,11 @@ table{width:100%;border-collapse:collapse;font-size:13px}td,th{text-align:left;p
 <tr><td>11</td><td>348</td><td>348 AH VYŠKOV</td></tr>
 <tr><td>12</td><td>185</td><td>185 A VIZOVICE</td></tr>
 <tr><td>13</td><td>676</td><td>676 AH VSETÍN</td></tr>
-</table></div>
-<div class="den"><div class="head"><span>den 5 · 13 prodejen · 272 km · ⏱ 10.4 h</span><span>5 963 Kč</span></div>
-<div class="route">🚚 Hodonín → Bo Cejl → Brno Moravské Náměstí → Brno → Brno Lidická → Blansko Čsad → Prostějov → Olomouc → Hodonín 🏠</div>
-<table><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr>
+</tbody></table></div>
+<div class="den">
+<div class="den-head"><span>Den 5 · 13 prodejen · 272 km · ⏱ 10.4 h</span><span class="price">5 963 Kč</span></div>
+<div class="den-route">🚚 Hodonín → Bo Cejl → Brno Moravské Náměstí → Brno → Brno Lidická → Blansko Čsad → Prostějov → Olomouc → Hodonín 🏠</div>
+<table><thead><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr></thead><tbody>
 <tr><td>1</td><td>814</td><td>814 AH BO CEJL</td></tr>
 <tr><td>2</td><td>19</td><td>019 A BRNO MORAVSKÉ NÁMĚSTÍ</td></tr>
 <tr><td>3</td><td>4</td><td>004 A BRNO - BYSTRC</td></tr>
@@ -89,10 +249,11 @@ table{width:100%;border-collapse:collapse;font-size:13px}td,th{text-align:left;p
 <tr><td>11</td><td>220</td><td>220 A OLOMOUC</td></tr>
 <tr><td>12</td><td>401</td><td>401 A OLOMOUC</td></tr>
 <tr><td>13</td><td>834</td><td>834 AH OLOMOUC</td></tr>
-</table></div>
-<div class="den"><div class="head"><span>den 6 · 10 prodejen · 489 km · ⏱ 12.0 h</span><span>7 394 Kč</span></div>
-<div class="route">🚚 Hodonín → Boskovice → Letovice → Svitavy → Litomyšl → Ústí Nad Orlicí → Zábřeh → Šumperk → Jeseník → Hodonín 🏠</div>
-<table><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr>
+</tbody></table></div>
+<div class="den">
+<div class="den-head"><span>Den 6 · 10 prodejen · 489 km · ⏱ 12.0 h</span><span class="price">7 394 Kč</span></div>
+<div class="den-route">🚚 Hodonín → Boskovice → Letovice → Svitavy → Litomyšl → Ústí Nad Orlicí → Zábřeh → Šumperk → Jeseník → Hodonín 🏠</div>
+<table><thead><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr></thead><tbody>
 <tr><td>1</td><td>612</td><td>612 A BOSKOVICE</td></tr>
 <tr><td>2</td><td>489</td><td>489 A LETOVICE</td></tr>
 <tr><td>3</td><td>684</td><td>684 AH SVITAVY</td></tr>
@@ -103,10 +264,11 @@ table{width:100%;border-collapse:collapse;font-size:13px}td,th{text-align:left;p
 <tr><td>8</td><td>391</td><td>391 A ŠUMPERK</td></tr>
 <tr><td>9</td><td>356</td><td>356 AH ŠUMPERK</td></tr>
 <tr><td>10</td><td>122</td><td>122 A JESENÍK</td></tr>
-</table></div>
-<div class="den"><div class="head"><span>den 7 · 10 prodejen · 167 km · ⏱ 7.4 h</span><span>5 267 Kč</span></div>
-<div class="route">🚚 Hodonín → Hodonín → Břeclav → Modřice → Brno Komárov → Brno Vaňkovka → Brno → Hodonín 🏠</div>
-<table><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr>
+</tbody></table></div>
+<div class="den">
+<div class="den-head"><span>Den 7 · 10 prodejen · 167 km · ⏱ 7.4 h</span><span class="price">5 267 Kč</span></div>
+<div class="den-route">🚚 Hodonín → Hodonín → Břeclav → Modřice → Brno Komárov → Brno Vaňkovka → Brno → Hodonín 🏠</div>
+<table><thead><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr></thead><tbody>
 <tr><td>1</td><td>673</td><td>673 AH HODONÍN</td></tr>
 <tr><td>2</td><td>119</td><td>119 A BŘECLAV</td></tr>
 <tr><td>3</td><td>363</td><td>363 AH BŘECLAV</td></tr>
@@ -117,10 +279,11 @@ table{width:100%;border-collapse:collapse;font-size:13px}td,th{text-align:left;p
 <tr><td>8</td><td>2</td><td>002 A BRNO - BOHUNICE</td></tr>
 <tr><td>9</td><td>16</td><td>016 A BRNO - SLATINA</td></tr>
 <tr><td>10</td><td>12</td><td>012 A BRNO - ŠLAPANICE</td></tr>
-</table></div>
-<div class="den"><div class="head"><span>den 8 · 13 prodejen · 139 km · ⏱ 8.5 h</span><span>5 086 Kč</span></div>
-<div class="route">🚚 Hodonín → Brno → Hodonín 🏠</div>
-<table><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr>
+</tbody></table></div>
+<div class="den">
+<div class="den-head"><span>Den 8 · 13 prodejen · 139 km · ⏱ 8.5 h</span><span class="price">5 086 Kč</span></div>
+<div class="den-route">🚚 Hodonín → Brno → Hodonín 🏠</div>
+<table><thead><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr></thead><tbody>
 <tr><td>1</td><td>18</td><td>018 A BRNO - NOVÝ LÍSKOVEC</td></tr>
 <tr><td>2</td><td>22</td><td>022 A BRNO - BRATISLAVSKÁ</td></tr>
 <tr><td>3</td><td>23</td><td>023 A BRNO - KOCIÁNKA</td></tr>
@@ -134,10 +297,11 @@ table{width:100%;border-collapse:collapse;font-size:13px}td,th{text-align:left;p
 <tr><td>11</td><td>3</td><td>003 A BRNO - LÍŠEŇ</td></tr>
 <tr><td>12</td><td>669</td><td>669 A BRNO - LÍŠEŇ</td></tr>
 <tr><td>13</td><td>409</td><td>409 A BRNO - STARÝ LÍSKOVEC</td></tr>
-</table></div>
-<div class="den"><div class="head"><span>den 9 · 11 prodejen · 422 km · ⏱ 11.5 h</span><span>6 954 Kč</span></div>
-<div class="route">🚚 Hodonín → Bo Víděň → Moravský Krumlov → Znojmo → Třebíč Komenského Nám → Třebíč → Jihlava → Bystřice Nad Pernštejnem → Hodonín 🏠</div>
-<table><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr>
+</tbody></table></div>
+<div class="den">
+<div class="den-head"><span>Den 9 · 11 prodejen · 422 km · ⏱ 11.5 h</span><span class="price">6 954 Kč</span></div>
+<div class="den-route">🚚 Hodonín → Bo Víděň → Moravský Krumlov → Znojmo → Třebíč Komenského Nám → Třebíč → Jihlava → Bystřice Nad Pernštejnem → Hodonín 🏠</div>
+<table><thead><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr></thead><tbody>
 <tr><td>1</td><td>802</td><td>802 AH BO VÍDĚŇ</td></tr>
 <tr><td>2</td><td>175</td><td>175 A MORAVSKÝ KRUMLOV</td></tr>
 <tr><td>3</td><td>818</td><td>818 AH ZNOJMO</td></tr>
@@ -149,10 +313,11 @@ table{width:100%;border-collapse:collapse;font-size:13px}td,th{text-align:left;p
 <tr><td>9</td><td>731</td><td>731 A JIHLAVA</td></tr>
 <tr><td>10</td><td>828</td><td>828 AH JIHLAVA</td></tr>
 <tr><td>11</td><td>482</td><td>482 A BYSTŘICE NAD PERNŠTEJNEM</td></tr>
-</table></div>
-<div class="den"><div class="head"><span>den 10 · 11 prodejen · 587 km · ⏱ 13.9 h</span><span>8 038 Kč</span></div>
-<div class="route">🚚 Hodonín → Pardubice Kpt Bartoše → Pardubice → Hradec Králové → Nové Město Nad Metují → Náchod → Úpice → Trutnov → Hodonín 🏠</div>
-<table><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr>
+</tbody></table></div>
+<div class="den">
+<div class="den-head"><span>Den 10 · 11 prodejen · 587 km · ⏱ 13.9 h</span><span class="price">8 038 Kč</span></div>
+<div class="den-route">🚚 Hodonín → Pardubice Kpt Bartoše → Pardubice → Hradec Králové → Nové Město Nad Metují → Náchod → Úpice → Trutnov → Hodonín 🏠</div>
+<table><thead><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr></thead><tbody>
 <tr><td>1</td><td>551</td><td>551 A PARDUBICE KPT BARTOŠE</td></tr>
 <tr><td>2</td><td>552</td><td>552 A PARDUBICE</td></tr>
 <tr><td>3</td><td>559</td><td>559 A HRADEC KRÁLOVÉ</td></tr>
@@ -164,10 +329,11 @@ table{width:100%;border-collapse:collapse;font-size:13px}td,th{text-align:left;p
 <tr><td>9</td><td>357</td><td>357 AH NÁCHOD</td></tr>
 <tr><td>10</td><td>493</td><td>493 A ÚPICE</td></tr>
 <tr><td>11</td><td>359</td><td>359 AH TRUTNOV</td></tr>
-</table></div>
-<div class="den"><div class="head"><span>den 11 · 9 prodejen · 621 km · ⏱ 13.4 h</span><span>8 265 Kč</span></div>
-<div class="route">🚚 Hodonín → Žďár Nad Sázavou → Ždírec Nad Doubravou → Havlíčkův Brod → Chrudim → Pardubic → Pardubice → Vysoké Mýto → Kutná Hora → Hodonín 🏠</div>
-<table><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr>
+</tbody></table></div>
+<div class="den">
+<div class="den-head"><span>Den 11 · 9 prodejen · 621 km · ⏱ 13.4 h</span><span class="price">8 265 Kč</span></div>
+<div class="den-route">🚚 Hodonín → Žďár Nad Sázavou → Ždírec Nad Doubravou → Havlíčkův Brod → Chrudim → Pardubic → Pardubice → Vysoké Mýto → Kutná Hora → Hodonín 🏠</div>
+<table><thead><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr></thead><tbody>
 <tr><td>1</td><td>161</td><td>161 A ŽĎÁR NAD SÁZAVOU</td></tr>
 <tr><td>2</td><td>355</td><td>355 AH ŽĎÁR N/S</td></tr>
 <tr><td>3</td><td>605</td><td>605 A ŽDÍREC NAD DOUBRAVOU</td></tr>
@@ -177,30 +343,36 @@ table{width:100%;border-collapse:collapse;font-size:13px}td,th{text-align:left;p
 <tr><td>7</td><td>803</td><td>803 AH PARDUBICE</td></tr>
 <tr><td>8</td><td>421</td><td>421 A VYSOKÉ MÝTO</td></tr>
 <tr><td>9</td><td>525</td><td>525 A KUTNÁ HORA</td></tr>
-</table></div>
-<h2>Auto 2 — střed (Vysočina, Praha a okolí) &nbsp;—&nbsp; 11 dní · 7 061 km · 92 440 Kč</h2>
-<div class="den"><div class="head"><span>den 1 · 5 prodejen · 675 km · ⏱ 12.1 h</span><span>8 622 Kč</span></div>
-<div class="route">🚚 Hodonín → Jablonec Nad Nisou → Liberec → Hodonín 🏠</div>
-<table><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr>
+</tbody></table></div>
+</div></div>
+<div class="auto-section">
+<div class="auto-header" style="background:#059669;"><span class="name">Auto 2 — střed (Vysočina, Praha a okolí)</span><span class="stats">11 dní · 7 061 km · 92 440 Kč</span></div>
+<div class="auto-body">
+<div class="den">
+<div class="den-head"><span>Den 1 · 5 prodejen · 675 km · ⏱ 12.1 h</span><span class="price">8 622 Kč</span></div>
+<div class="den-route">🚚 Hodonín → Jablonec Nad Nisou → Liberec → Hodonín 🏠</div>
+<table><thead><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr></thead><tbody>
 <tr><td>1</td><td>562</td><td>562 A JABLONEC NAD NISOU</td></tr>
 <tr><td>2</td><td>831</td><td>831 AH JAB.N.NI</td></tr>
 <tr><td>3</td><td>651</td><td>651 A LIBEREC</td></tr>
 <tr><td>4</td><td>654</td><td>654 AH LIBEREC</td></tr>
 <tr><td>5</td><td>825</td><td>825 AH LIBEREC</td></tr>
-</table></div>
-<div class="den"><div class="head"><span>den 2 · 6 prodejen · 753 km · ⏱ 13.8 h</span><span>9 135 Kč</span></div>
-<div class="route">🚚 Hodonín → Poděbrady → Nymburk → Mladá Boleslav → Litoměřice → Hodonín 🏠</div>
-<table><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr>
+</tbody></table></div>
+<div class="den">
+<div class="den-head"><span>Den 2 · 6 prodejen · 753 km · ⏱ 13.8 h</span><span class="price">9 135 Kč</span></div>
+<div class="den-route">🚚 Hodonín → Poděbrady → Nymburk → Mladá Boleslav → Litoměřice → Hodonín 🏠</div>
+<table><thead><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr></thead><tbody>
 <tr><td>1</td><td>558</td><td>558 A PODĚBRADY</td></tr>
 <tr><td>2</td><td>680</td><td>680 AH NYMBURK</td></tr>
 <tr><td>3</td><td>832</td><td>832 AH ML.BOLES</td></tr>
 <tr><td>4</td><td>806</td><td>806 AH ML.BOLES</td></tr>
 <tr><td>5</td><td>190</td><td>190 AH M.BOLES.</td></tr>
 <tr><td>6</td><td>822</td><td>822 AH LITOMĚŘICE</td></tr>
-</table></div>
-<div class="den"><div class="head"><span>den 3 · 8 prodejen · 513 km · ⏱ 11.3 h</span><span>7 554 Kč</span></div>
-<div class="route">🚚 Hodonín → Jindřichův Hradec → České Budějovice → Hodonín 🏠</div>
-<table><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr>
+</tbody></table></div>
+<div class="den">
+<div class="den-head"><span>Den 3 · 8 prodejen · 513 km · ⏱ 11.3 h</span><span class="price">7 554 Kč</span></div>
+<div class="den-route">🚚 Hodonín → Jindřichův Hradec → České Budějovice → Hodonín 🏠</div>
+<table><thead><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr></thead><tbody>
 <tr><td>1</td><td>334</td><td>334 AH JINDŘICHŮV HRADEC</td></tr>
 <tr><td>2</td><td>354</td><td>354 AH JINDŘICHŮV HRADEC</td></tr>
 <tr><td>3</td><td>801</td><td>801 AH Č.BUDĚJ</td></tr>
@@ -209,42 +381,46 @@ table{width:100%;border-collapse:collapse;font-size:13px}td,th{text-align:left;p
 <tr><td>6</td><td>637</td><td>637 A ČESKÉ BUDĚJOVICE</td></tr>
 <tr><td>7</td><td>529</td><td>529 A ČESKÉ BUDĚJOVICE</td></tr>
 <tr><td>8</td><td>490</td><td>490 A CES.BUDEJ LANNOVA</td></tr>
-</table></div>
-<div class="den"><div class="head"><span>den 4 · 6 prodejen · 587 km · ⏱ 11.4 h</span><span>8 041 Kč</span></div>
-<div class="route">🚚 Hodonín → Praha Okoli → Hodonín 🏠</div>
-<table><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr>
-<tr><td>1</td><td>340</td><td>340 A ÚVALY U PRAHY</td></tr>
-<tr><td>2</td><td>619</td><td>619 A ROZTOKY U PRAHY</td></tr>
+</tbody></table></div>
+<div class="den">
+<div class="den-head"><span>Den 4 · 6 prodejen · 587 km · ⏱ 11.4 h</span><span class="price">8 041 Kč</span></div>
+<div class="den-route">🚚 Hodonín → Praha Okoli → Hodonín 🏠</div>
+<table><thead><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr></thead><tbody>
+<tr><td>1</td><td>619</td><td>619 A ROZTOKY U PRAHY</td></tr>
+<tr><td>2</td><td>340</td><td>340 A ÚVALY U PRAHY</td></tr>
 <tr><td>3</td><td>729</td><td>729 AH VESTEC</td></tr>
 <tr><td>4</td><td>8728</td><td>8728 A JESENICE U PRAHY</td></tr>
 <tr><td>5</td><td>573</td><td>573 AH PRŮHONICE</td></tr>
 <tr><td>6</td><td>857</td><td>857 A ŘÍČANY</td></tr>
-</table></div>
-<div class="den"><div class="head"><span>den 5 · 4 prodejen · 811 km · ⏱ 13.6 h</span><span>9 521 Kč</span></div>
-<div class="route">🚚 Hodonín → Česká Lípa → Děčín → Varnsdor → Hodonín 🏠</div>
-<table><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr>
+</tbody></table></div>
+<div class="den">
+<div class="den-head"><span>Den 5 · 4 prodejen · 811 km · ⏱ 13.6 h</span><span class="price">9 521 Kč</span></div>
+<div class="den-route">🚚 Hodonín → Česká Lípa → Děčín → Varnsdor → Hodonín 🏠</div>
+<table><thead><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr></thead><tbody>
 <tr><td>1</td><td>351</td><td>351 A Č. LÍPA</td></tr>
 <tr><td>2</td><td>824</td><td>824 AH ČES.LÍPA</td></tr>
 <tr><td>3</td><td>677</td><td>677 AH DĚČÍN</td></tr>
 <tr><td>4</td><td>694</td><td>694 AH VARNSDOR</td></tr>
-</table></div>
-<div class="den"><div class="head"><span>den 6 · 10 prodejen · 620 km · ⏱ 13.9 h</span><span>8 261 Kč</span></div>
-<div class="route">🚚 Hodonín → Praha → Hodonín 🏠</div>
-<table><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr>
-<tr><td>1</td><td>745</td><td>745 A PRAHA 9 - HORNÍ POČERNICE</td></tr>
-<tr><td>2</td><td>540</td><td>540 A PRAHA 10 - TAŠKENT</td></tr>
-<tr><td>3</td><td>575</td><td>575 A PRAHA 6 - ŘEPY</td></tr>
-<tr><td>4</td><td>767</td><td>767 A PRAHA 3 - VINOHRADSKÁ</td></tr>
-<tr><td>5</td><td>526</td><td>526 A PRAHA 3 - PALÁC FLORA</td></tr>
+</tbody></table></div>
+<div class="den">
+<div class="den-head"><span>Den 6 · 10 prodejen · 620 km · ⏱ 13.9 h</span><span class="price">8 261 Kč</span></div>
+<div class="den-route">🚚 Hodonín → Praha → Hodonín 🏠</div>
+<table><thead><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr></thead><tbody>
+<tr><td>1</td><td>540</td><td>540 A PRAHA 10 - TAŠKENT</td></tr>
+<tr><td>2</td><td>575</td><td>575 A PRAHA 6 - ŘEPY</td></tr>
+<tr><td>3</td><td>767</td><td>767 A PRAHA 3 - VINOHRADSKÁ</td></tr>
+<tr><td>4</td><td>526</td><td>526 A PRAHA 3 - PALÁC FLORA</td></tr>
+<tr><td>5</td><td>745</td><td>745 A PRAHA 9 - HORNÍ POČERNICE</td></tr>
 <tr><td>6</td><td>753</td><td>753 A PRAHA 8 - METRO KOBYLISY</td></tr>
 <tr><td>7</td><td>3195</td><td>3195 REST. BUTOVICE</td></tr>
 <tr><td>8</td><td>644</td><td>644 A PRAHA 7 - HOLEŠOVICE</td></tr>
 <tr><td>9</td><td>762</td><td>762 A PRAHA 8 - SOKOLNÍKY</td></tr>
 <tr><td>10</td><td>750</td><td>750 A PRAHA 8 - LIBEŇ</td></tr>
-</table></div>
-<div class="den"><div class="head"><span>den 7 · 10 prodejen · 620 km · ⏱ 13.9 h</span><span>8 261 Kč</span></div>
-<div class="route">🚚 Hodonín → Praha → Hodonín 🏠</div>
-<table><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr>
+</tbody></table></div>
+<div class="den">
+<div class="den-head"><span>Den 7 · 10 prodejen · 620 km · ⏱ 13.9 h</span><span class="price">8 261 Kč</span></div>
+<div class="den-route">🚚 Hodonín → Praha → Hodonín 🏠</div>
+<table><thead><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr></thead><tbody>
 <tr><td>1</td><td>860</td><td>860 A PRAHA - LETŇANY</td></tr>
 <tr><td>2</td><td>570</td><td>570 A PRAHA 8 - KOBYLISY - LÁDVÍ</td></tr>
 <tr><td>3</td><td>202</td><td>202 AH RUZYNĚ</td></tr>
@@ -255,10 +431,11 @@ table{width:100%;border-collapse:collapse;font-size:13px}td,th{text-align:left;p
 <tr><td>8</td><td>748</td><td>748 A PRAHA 4-  KRČ</td></tr>
 <tr><td>9</td><td>548</td><td>548 A PRAHA 4 - MICHLE</td></tr>
 <tr><td>10</td><td>544</td><td>544 A PRAHA 4 - LIBUŠ - OBZOR</td></tr>
-</table></div>
-<div class="den"><div class="head"><span>den 8 · 10 prodejen · 620 km · ⏱ 13.9 h</span><span>8 261 Kč</span></div>
-<div class="route">🚚 Hodonín → Praha → Hodonín 🏠</div>
-<table><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr>
+</tbody></table></div>
+<div class="den">
+<div class="den-head"><span>Den 8 · 10 prodejen · 620 km · ⏱ 13.9 h</span><span class="price">8 261 Kč</span></div>
+<div class="den-route">🚚 Hodonín → Praha → Hodonín 🏠</div>
+<table><thead><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr></thead><tbody>
 <tr><td>1</td><td>543</td><td>543 A PRAHA 4 - KAMÝK - JASNÁ</td></tr>
 <tr><td>2</td><td>856</td><td>856 A PRAHA - JAHODNICE</td></tr>
 <tr><td>3</td><td>805</td><td>805 AH PRAHA HOSTIVAŘ</td></tr>
@@ -269,10 +446,11 @@ table{width:100%;border-collapse:collapse;font-size:13px}td,th{text-align:left;p
 <tr><td>8</td><td>601</td><td>601 A PRAHA - VACKOV</td></tr>
 <tr><td>9</td><td>580</td><td>580 A PRAHA 4 - CHODOV</td></tr>
 <tr><td>10</td><td>578</td><td>578 A PRAHA - HORNÍ MĚCHOLUPY</td></tr>
-</table></div>
-<div class="den"><div class="head"><span>den 9 · 10 prodejen · 620 km · ⏱ 13.9 h</span><span>8 261 Kč</span></div>
-<div class="route">🚚 Hodonín → Praha → Hodonín 🏠</div>
-<table><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr>
+</tbody></table></div>
+<div class="den">
+<div class="den-head"><span>Den 9 · 10 prodejen · 620 km · ⏱ 13.9 h</span><span class="price">8 261 Kč</span></div>
+<div class="den-route">🚚 Hodonín → Praha → Hodonín 🏠</div>
+<table><thead><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr></thead><tbody>
 <tr><td>1</td><td>577</td><td>577 A PRAHA 9 - ČERNÝ MOST</td></tr>
 <tr><td>2</td><td>576</td><td>576 A PRAHA 10 - SKALKA</td></tr>
 <tr><td>3</td><td>572</td><td>572 A PRAHA 4 - SPOŘILOV</td></tr>
@@ -283,10 +461,11 @@ table{width:100%;border-collapse:collapse;font-size:13px}td,th{text-align:left;p
 <tr><td>8</td><td>624</td><td>624 A PRAHA 5 - ZBRASLAV</td></tr>
 <tr><td>9</td><td>589</td><td>589 A PRAHA BŘEVNOV</td></tr>
 <tr><td>10</td><td>585</td><td>585 A PRAHA 5 - STODŮLKY</td></tr>
-</table></div>
-<div class="den"><div class="head"><span>den 10 · 10 prodejen · 620 km · ⏱ 13.9 h</span><span>8 261 Kč</span></div>
-<div class="route">🚚 Hodonín → Praha → Hodonín 🏠</div>
-<table><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr>
+</tbody></table></div>
+<div class="den">
+<div class="den-head"><span>Den 10 · 10 prodejen · 620 km · ⏱ 13.9 h</span><span class="price">8 261 Kč</span></div>
+<div class="den-route">🚚 Hodonín → Praha → Hodonín 🏠</div>
+<table><thead><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr></thead><tbody>
 <tr><td>1</td><td>583</td><td>583 A PRAHA 5 - SMÍCHOV - ANDĚL</td></tr>
 <tr><td>2</td><td>582</td><td>582 A PRAHA 5 - BARRANDOV</td></tr>
 <tr><td>3</td><td>574</td><td>574 A PRAHA 5 - NOVÉ BUTOVICE</td></tr>
@@ -297,10 +476,11 @@ table{width:100%;border-collapse:collapse;font-size:13px}td,th{text-align:left;p
 <tr><td>8</td><td>865</td><td>865 A PRAHA - NÁMĚSTÍ MÍRU</td></tr>
 <tr><td>9</td><td>863</td><td>863 A PRAHA - FLORENTINUM</td></tr>
 <tr><td>10</td><td>833</td><td>833 AH PRAHA HARFA</td></tr>
-</table></div>
-<div class="den"><div class="head"><span>den 11 · 10 prodejen · 620 km · ⏱ 13.9 h</span><span>8 261 Kč</span></div>
-<div class="route">🚚 Hodonín → Praha → Hodonín 🏠</div>
-<table><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr>
+</tbody></table></div>
+<div class="den">
+<div class="den-head"><span>Den 11 · 10 prodejen · 620 km · ⏱ 13.9 h</span><span class="price">8 261 Kč</span></div>
+<div class="den-route">🚚 Hodonín → Praha → Hodonín 🏠</div>
+<table><thead><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr></thead><tbody>
 <tr><td>1</td><td>769</td><td>769 A PRAHA 3 - BEZOVKA</td></tr>
 <tr><td>2</td><td>749</td><td>749 A PRAHA 1 - KRONE</td></tr>
 <tr><td>3</td><td>746</td><td>746 A PRAHA 8 - INVALIDOVNA</td></tr>
@@ -311,93 +491,120 @@ table{width:100%;border-collapse:collapse;font-size:13px}td,th{text-align:left;p
 <tr><td>8</td><td>568</td><td>568 A PRAHA 8 - KARLÍN</td></tr>
 <tr><td>9</td><td>531</td><td>531 A PRAHA 1 - PALLADIUM</td></tr>
 <tr><td>10</td><td>527</td><td>527 A PRAHA 2 - NOVÉ MĚSTO</td></tr>
-</table></div>
-<h2>Auto 3 — západ, jih a sever Čech &nbsp;—&nbsp; 12 dní · 9 729 km · 114 215 Kč</h2>
-<div class="den"><div class="head"><span>den 1 · 5 prodejen · 620 km · ⏱ 11.4 h</span><span>8 261 Kč</span></div>
-<div class="route">🚚 Hodonín → Praha → Hodonín 🏠</div>
-<table><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr>
+</tbody></table></div>
+</div></div>
+<div class="auto-section">
+<div class="auto-header" style="background:#7c3aed;"><span class="name">Auto 3 — západ, jih a sever Čech</span><span class="stats">12 dní · 9 729 km · 114 215 Kč</span></div>
+<div class="auto-body">
+<div class="den">
+<div class="den-head"><span>Den 1 · 5 prodejen · 620 km · ⏱ 11.4 h</span><span class="price">8 261 Kč</span></div>
+<div class="den-route">🚚 Hodonín → Praha → Hodonín 🏠</div>
+<table><thead><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr></thead><tbody>
 <tr><td>1</td><td>500</td><td>500 A PRAHA MOSKEVSKÁ</td></tr>
 <tr><td>2</td><td>496</td><td>496 A PRAHA HLAVNÍ NÁDRAŽÍ</td></tr>
 <tr><td>3</td><td>198</td><td>198 AH CHODOV</td></tr>
 <tr><td>4</td><td>598</td><td>598 A PHA TRNKOVO NÁMĚSTÍ</td></tr>
 <tr><td>5</td><td>337</td><td>337 A PRAHA PAPRSEK</td></tr>
-</table></div>
-<div class="den"><div class="head"><span>den 2 · 6 prodejen · 641 km · ⏱ 12.2 h</span><span>8 399 Kč</span></div>
-<div class="route">🚚 Hodonín → Tábor → Milevsko Blanicka → Příbram → Hodonín 🏠</div>
-<table><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr>
+</tbody></table></div>
+<div class="den">
+<div class="den-head"><span>Den 2 · 6 prodejen · 641 km · ⏱ 12.2 h</span><span class="price">8 399 Kč</span></div>
+<div class="den-route">🚚 Hodonín → Tábor → Milevsko Blanicka → Příbram → Hodonín 🏠</div>
+<table><thead><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr></thead><tbody>
 <tr><td>1</td><td>639</td><td>639 A TÁBOR</td></tr>
 <tr><td>2</td><td>817</td><td>817 AH TÁBOR</td></tr>
 <tr><td>3</td><td>690</td><td>690 AH TÁBOR</td></tr>
 <tr><td>4</td><td>481</td><td>481 A MILEVSKO BLANICKA</td></tr>
 <tr><td>5</td><td>645</td><td>645 A PŘÍBRAM</td></tr>
 <tr><td>6</td><td>628</td><td>628 AH PŘÍBRAM</td></tr>
-</table></div>
-<div class="den"><div class="head"><span>den 3 · 4 prodejen · 793 km · ⏱ 13.3 h</span><span>9 403 Kč</span></div>
-<div class="route">🚚 Hodonín → Kladno → Rakovník → Louny → Hodonín 🏠</div>
-<table><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr>
+</tbody></table></div>
+<div class="den">
+<div class="den-head"><span>Den 3 · 4 prodejen · 793 km · ⏱ 13.3 h</span><span class="price">9 403 Kč</span></div>
+<div class="den-route">🚚 Hodonín → Kladno → Rakovník → Louny → Hodonín 🏠</div>
+<table><thead><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr></thead><tbody>
 <tr><td>1</td><td>646</td><td>646 A KLADNO</td></tr>
 <tr><td>2</td><td>692</td><td>692 AH KLADNO</td></tr>
 <tr><td>3</td><td>629</td><td>629 AH RAKOVNÍK</td></tr>
 <tr><td>4</td><td>565</td><td>565 A LOUNY</td></tr>
-</table></div>
-<div class="den"><div class="head"><span>den 4 · 4 prodejen · 820 km · ⏱ 13.7 h</span><span>9 580 Kč</span></div>
-<div class="route">🚚 Hodonín → Ústí Nad Labem → Teplice → Bílina → Hodonín 🏠</div>
-<table><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr>
+</tbody></table></div>
+<div class="den">
+<div class="den-head"><span>Den 4 · 4 prodejen · 820 km · ⏱ 13.7 h</span><span class="price">9 580 Kč</span></div>
+<div class="den-route">🚚 Hodonín → Ústí Nad Labem → Teplice → Bílina → Hodonín 🏠</div>
+<table><thead><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr></thead><tbody>
 <tr><td>1</td><td>626</td><td>626 AH ÚSTÍ N/L</td></tr>
 <tr><td>2</td><td>191</td><td>191 AH TEPLICE</td></tr>
 <tr><td>3</td><td>810</td><td>810 AH TEPLICE</td></tr>
 <tr><td>4</td><td>830</td><td>830 AH BÍLINA</td></tr>
-</table></div>
-<div class="den"><div class="head"><span>den 5 · 3 prodejen · 696 km · ⏱ 11.4 h</span><span>8 763 Kč</span></div>
-<div class="route">🚚 Hodonín → Písek → Strakonice → Sušice → Hodonín 🏠</div>
-<table><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr>
+</tbody></table></div>
+<div class="den">
+<div class="den-head"><span>Den 5 · 3 prodejen · 696 km · ⏱ 11.4 h</span><span class="price">8 763 Kč</span></div>
+<div class="den-route">🚚 Hodonín → Písek → Strakonice → Sušice → Hodonín 🏠</div>
+<table><thead><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr></thead><tbody>
 <tr><td>1</td><td>367</td><td>367 AH PÍSEK</td></tr>
 <tr><td>2</td><td>335</td><td>335 AH STRAKONICE</td></tr>
 <tr><td>3</td><td>610</td><td>610 A SUŠICE</td></tr>
-</table></div>
-<div class="den"><div class="head"><span>den 6 · 3 prodejen · 866 km · ⏱ 13.9 h</span><span>9 879 Kč</span></div>
-<div class="route">🚚 Hodonín → Most → Kadaň → Hodonín 🏠</div>
-<table><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr>
+</tbody></table></div>
+<div class="den">
+<div class="den-head"><span>Den 6 · 3 prodejen · 866 km · ⏱ 13.9 h</span><span class="price">9 879 Kč</span></div>
+<div class="den-route">🚚 Hodonín → Most → Kadaň → Hodonín 🏠</div>
+<table><thead><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr></thead><tbody>
 <tr><td>1</td><td>695</td><td>695 AH MOST</td></tr>
 <tr><td>2</td><td>813</td><td>813 AH MOST</td></tr>
 <tr><td>3</td><td>586</td><td>586 A KADAŇ</td></tr>
-</table></div>
-<div class="den"><div class="head"><span>den 7 · 6 prodejen · 752 km · ⏱ 13.7 h</span><span>9 133 Kč</span></div>
-<div class="route">🚚 Hodonín → Plzeň → Hodonín 🏠</div>
-<table><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr>
+</tbody></table></div>
+<div class="den">
+<div class="den-head"><span>Den 7 · 6 prodejen · 752 km · ⏱ 13.7 h</span><span class="price">9 133 Kč</span></div>
+<div class="den-route">🚚 Hodonín → Plzeň → Hodonín 🏠</div>
+<table><thead><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr></thead><tbody>
 <tr><td>1</td><td>615</td><td>615 A PLZEŇ</td></tr>
 <tr><td>2</td><td>632</td><td>632 A PLZEŇ </td></tr>
 <tr><td>3</td><td>815</td><td>815 AH PLZEŇ</td></tr>
 <tr><td>4</td><td>192</td><td>192 AH PLZEŇ-ČE</td></tr>
 <tr><td>5</td><td>477</td><td>477 A PLZEŇ</td></tr>
 <tr><td>6</td><td>536</td><td>536 A PLZEŇ</td></tr>
-</table></div>
-<div class="den"><div class="head"><span>den 8 · 3 prodejen · 798 km · ⏱ 12.9 h</span><span>9 436 Kč</span></div>
-<div class="route">🚚 Hodonín → Klatovy → Plzeň → Plzeň G. → Hodonín 🏠</div>
-<table><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr>
+</tbody></table></div>
+<div class="den">
+<div class="den-head"><span>Den 8 · 3 prodejen · 798 km · ⏱ 12.9 h</span><span class="price">9 436 Kč</span></div>
+<div class="den-route">🚚 Hodonín → Klatovy → Plzeň → Plzeň G. → Hodonín 🏠</div>
+<table><thead><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr></thead><tbody>
 <tr><td>1</td><td>630</td><td>630 AH KLATOVY</td></tr>
 <tr><td>2</td><td>567</td><td>567 A PLZEŇ</td></tr>
 <tr><td>3</td><td>350</td><td>350 AH PLZEŇ G.</td></tr>
-</table></div>
-<div class="den"><div class="head"><span>den 9 · 2 prodejen · 892 km · ⏱ 13.7 h</span><span>10 056 Kč</span></div>
-<div class="route">🚚 Hodonín → Karlovy Vary → Hodonín 🏠</div>
-<table><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr>
+</tbody></table></div>
+<div class="den">
+<div class="den-head"><span>Den 9 · 2 prodejen · 892 km · ⏱ 13.7 h</span><span class="price">10 056 Kč</span></div>
+<div class="den-route">🚚 Hodonín → Karlovy Vary → Hodonín 🏠</div>
+<table><thead><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr></thead><tbody>
 <tr><td>1</td><td>820</td><td>820 AH KARLOVY VARY</td></tr>
 <tr><td>2</td><td>659</td><td>659 A KARLOVY VARY</td></tr>
-</table></div>
-<div class="den"><div class="head"><span>den 10 · 1 prodejen · 927 km · ⏱ 13.7 h</span><span>10 282 Kč</span></div>
-<div class="route">🚚 Hodonín → Nejdek → Hodonín 🏠</div>
-<table><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr>
+</tbody></table></div>
+<div class="den">
+<div class="den-head"><span>Den 10 · 1 prodejen · 927 km · ⏱ 13.7 h</span><span class="price">10 282 Kč</span></div>
+<div class="den-route">🚚 Hodonín → Nejdek → Hodonín 🏠</div>
+<table><thead><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr></thead><tbody>
 <tr><td>1</td><td>593</td><td>593 A NEJDEK</td></tr>
-</table></div>
-<div class="den"><div class="head"><span>den 11 · 1 prodejen · 961 km · ⏱ 14.2 h <span class="warn">⚠ přes strop</span></span><span>10 511 Kč</span></div>
-<div class="route">🚚 Hodonín → Cheb → Hodonín 🏠</div>
-<table><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr>
+</tbody></table></div>
+<div class="den">
+<div class="den-head"><span>Den 11 · 1 prodejen · 961 km · ⏱ 14.2 h <span class="warn">⚠ přes strop 14 h</span></span><span class="price">10 511 Kč</span></div>
+<div class="den-route">🚚 Hodonín → Cheb → Hodonín 🏠</div>
+<table><thead><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr></thead><tbody>
 <tr><td>1</td><td>827</td><td>827 AH CHEB</td></tr>
-</table></div>
-<div class="den"><div class="head"><span>den 12 · 1 prodejen · 961 km · ⏱ 14.2 h <span class="warn">⚠ přes strop</span></span><span>10 511 Kč</span></div>
-<div class="route">🚚 Hodonín → Cheb Svobody → Hodonín 🏠</div>
-<table><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr>
+</tbody></table></div>
+<div class="den">
+<div class="den-head"><span>Den 12 · 1 prodejen · 961 km · ⏱ 14.2 h <span class="warn">⚠ přes strop 14 h</span></span><span class="price">10 511 Kč</span></div>
+<div class="den-route">🚚 Hodonín → Cheb Svobody → Hodonín 🏠</div>
+<table><thead><tr><th>#</th><th>Kód</th><th>Prodejna</th></tr></thead><tbody>
 <tr><td>1</td><td>494</td><td>494 A CHEB SVOBODY</td></tr>
-</table></div>
-</body></html>
+</tbody></table></div>
+</div></div>
+<div class="notes">
+  <h3>Poznámky ke kalkulaci</h3>
+  <ul>
+    <li>Ceny jsou uvedené <strong>bez DPH</strong>.</li>
+    <li>Rozvoz z depa <strong>Hodonín</strong> s návratem na základnu <strong>každý den</strong> (bez přespání řidiče).</li>
+    <li>Kapacita 1 auta: <strong>81 bedniček / 13 prodejen</strong> (bednička 14.79 kg × 6 ks / prodejna).</li>
+    <li>Cenový vzorec: <strong>4167 Kč základ + 6.6 Kč / km</strong>.</li>
+    <li>Nabídka platí <strong>30 dní</strong> od data vystavení.</li>
+  </ul>
+</div>
+<div class="footer">Připraveno 06. 07. 2026 · Craft prodejen · Depo Hodonín</div>
+</div></body></html>
