@@ -5,26 +5,34 @@
 <title>Cenová nabídka — rozvoz Craft prodejen</title>
 <style>
 * { box-sizing: border-box; }
-body { font-family: -apple-system, "Segoe UI", sans-serif; max-width: 900px; margin: 60px auto; padding: 0 20px; background: #f5f6f8; color: #1c2433; }
+body { font-family: -apple-system, "Segoe UI", sans-serif; max-width: 1100px; margin: 60px auto; padding: 0 20px; background: #f5f6f8; color: #1c2433; }
 h1 { font-size: 2.3rem; margin: 0 0 6px; color: #0f172a; letter-spacing: -0.02em; }
 .subtitle { color: #64748b; font-size: 1.1rem; margin-bottom: 40px; }
 .summary { background: #eef1fb; padding: 20px 24px; border-radius: 10px; margin-bottom: 30px; font-size: 1rem; color: #1e3a8a; }
-.variants { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-.card { background: white; padding: 32px; border-radius: 14px; box-shadow: 0 4px 14px rgba(0,0,0,0.08); text-decoration: none; color: inherit; display: block; transition: transform 0.15s, box-shadow 0.15s; border-top: 6px solid; }
+.variants { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+@media (max-width: 900px) { .variants { grid-template-columns: 1fr; } }
+.card { background: white; padding: 28px; border-radius: 14px; box-shadow: 0 4px 14px rgba(0,0,0,0.08); text-decoration: none; color: inherit; display: block; transition: transform 0.15s, box-shadow 0.15s; border-top: 6px solid; }
 .card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+.card.v1 { border-top-color: #64748b; }
 .card.v3 { border-top-color: #1d4ed8; }
 .card.v2 { border-top-color: #059669; }
-.card-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 8px; }
+.card-badge { display: inline-block; font-size: 0.75rem; font-weight: 700; padding: 3px 10px; border-radius: 4px; letter-spacing: 0.05em; margin-bottom: 10px; }
+.card.v1 .card-badge { background: #f1f5f9; color: #475569; }
+.card.v3 .card-badge { background: #dbeafe; color: #1d4ed8; }
+.card.v2 .card-badge { background: #dcfce7; color: #059669; }
+.card-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 4px; }
+.card.v1 .card-title { color: #475569; }
 .card.v3 .card-title { color: #1d4ed8; }
 .card.v2 .card-title { color: #059669; }
-.card-sub { color: #64748b; font-size: 0.95rem; margin-bottom: 20px; }
-.card-stats { font-size: 0.95rem; line-height: 1.9; color: #475569; border-top: 1px solid #e2e8f0; padding-top: 16px; }
+.card-sub { color: #64748b; font-size: 0.9rem; margin-bottom: 16px; }
+.card-stats { font-size: 0.9rem; line-height: 1.85; color: #475569; border-top: 1px solid #e2e8f0; padding-top: 14px; }
 .card-stats strong { color: #0f172a; }
-.card-price { font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; margin: 12px 0 4px; }
+.card-price { font-size: 1.85rem; font-weight: 800; letter-spacing: -0.02em; margin: 10px 0 2px; }
+.card.v1 .card-price { color: #475569; }
 .card.v3 .card-price { color: #1d4ed8; }
 .card.v2 .card-price { color: #059669; }
-.card-cta { margin-top: 20px; padding: 10px 18px; background: #0f172a; color: white; border-radius: 6px; text-align: center; font-weight: 600; font-size: 0.95rem; }
-.warn { color: #b23; font-size: 0.85rem; margin-top: 8px; }
+.card-cta { margin-top: 18px; padding: 9px 16px; background: #0f172a; color: white; border-radius: 6px; text-align: center; font-weight: 600; font-size: 0.9rem; }
+.warn { color: #b23; font-size: 0.82rem; margin-top: 6px; }
 .footer { margin-top: 50px; padding-top: 24px; border-top: 1px solid #e2e8f0; color: #64748b; font-size: 0.85rem; text-align: center; }
 </style>
 </head>
@@ -34,38 +42,57 @@ h1 { font-size: 2.3rem; margin: 0 0 6px; color: #0f172a; letter-spacing: -0.02em
 <div class="subtitle">252 prodejen po celé ČR · pravidelný rozvoz každých 14 dní · depo Hodonín</div>
 
 <div class="summary">
-  <strong>Rozvoz probíhá v 14denním cyklu</strong> — každá prodejna dostane zboží 1× za 14 dní. Vyberte si variantu podle počtu vozidel, které chcete nasadit.
+  <strong>Rozvoz probíhá v 14denním cyklu</strong> — každá prodejna dostane zboží 1× za 14 dní. Vyber si variantu podle počtu vozidel.
 </div>
 
 <div class="variants">
+
+  <a href="v1.html" class="card v1">
+    <div class="card-badge">V1 · PŮVODNÍ</div>
+    <div class="card-title">Konzervativní plán</div>
+    <div class="card-sub">Přísný 12h denní limit s rezervou</div>
+    <div class="card-price">315 519 Kč</div>
+    <div style="font-size: 0.82rem; color: #64748b;">za 1 cyklus · bez DPH</div>
+    <div class="card-stats">
+      <div><strong>41</strong> auto-dní práce</div>
+      <div><strong>~14 kalendářních dní</strong> (3 auta)</div>
+      <div><strong>16 366 km</strong> celkem</div>
+      <div>Ročně: <strong>~8 203 494 Kč</strong> (26 cyklů)</div>
+    </div>
+    <div class="card-cta">Zobrazit plán →</div>
+  </a>
+
   <a href="3auta.html" class="card v3">
-    <div class="card-title">Varianta A · 3 auta souběžně</div>
-    <div class="card-sub">Doporučeno — bezpečně stihne 14denní cyklus</div>
+    <div class="card-badge">V3 · DOPORUČENO</div>
+    <div class="card-title">3 auta souběžně</div>
+    <div class="card-sub">Bezpečně stihne 14denní cyklus</div>
     <div class="card-price">282 115 Kč</div>
-    <div style="font-size: 0.85rem; color: #64748b;">za 1 cyklus (14 dní) · bez DPH</div>
+    <div style="font-size: 0.82rem; color: #64748b;">za 1 cyklus · bez DPH</div>
     <div class="card-stats">
       <div><strong>34</strong> auto-dní práce</div>
-      <div><strong>~12 kalendářních dní</strong> hotovo (2 dny rezerva)</div>
+      <div><strong>~12 kalendářních dní</strong> (2 dny rezerva)</div>
       <div><strong>21 278 km</strong> celkem</div>
-      <div>Roční: <strong>~7 334 990 Kč</strong> (26 cyklů)</div>
+      <div>Ročně: <strong>~7 334 990 Kč</strong> (26 cyklů)</div>
     </div>
     <div class="card-cta">Zobrazit plán →</div>
   </a>
 
   <a href="2auta.html" class="card v2">
-    <div class="card-title">Varianta B · 2 auta souběžně</div>
-    <div class="card-sub">Levnější vozový park, ale těsně u limitu</div>
+    <div class="card-badge">V2 · LEVNĚJŠÍ FLOTILA</div>
+    <div class="card-title">2 auta souběžně</div>
+    <div class="card-sub">Menší vozový park, u limitu</div>
     <div class="card-price">282 114 Kč</div>
-    <div style="font-size: 0.85rem; color: #64748b;">za 1 cyklus (14 dní) · bez DPH</div>
+    <div style="font-size: 0.82rem; color: #64748b;">za 1 cyklus · bez DPH</div>
     <div class="card-stats">
       <div><strong>34</strong> auto-dní práce</div>
-      <div><strong>~17 kalendářních dní</strong> hotovo</div>
+      <div><strong>~17 kalendářních dní</strong></div>
       <div><strong>21 275 km</strong> celkem</div>
-      <div>Roční: <strong>~7 334 964 Kč</strong> (26 cyklů)</div>
+      <div>Ročně: <strong>~7 334 964 Kč</strong> (26 cyklů)</div>
     </div>
-    <div class="warn">⚠ 17 > 14 dní — cyklus vyžaduje víkendy nebo prodloužení intervalu</div>
+    <div class="warn">⚠ Přesahuje 14denní cyklus (víkendy/prodloužení)</div>
     <div class="card-cta">Zobrazit plán →</div>
   </a>
+
 </div>
 
 <div class="footer">
