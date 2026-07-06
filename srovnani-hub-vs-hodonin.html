@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<title>Srovnání: Pražský hub vs. napřímo z Hodonína</title>
+<style>
+* { box-sizing: border-box; }
+body { font-family: -apple-system, "Segoe UI", sans-serif; max-width: 1000px; margin: 40px auto; padding: 0 20px; background: #f5f6f8; color: #1c2433; }
+h1 { font-size: 2.1rem; margin: 0 0 6px; color: #0f172a; letter-spacing: -0.02em; }
+h2 { font-size: 1.4rem; margin: 40px 0 16px; color: #1e3a8a; }
+.back-link { display: inline-block; margin-bottom: 20px; color: #1d4ed8; text-decoration: none; font-size: 0.95rem; }
+.back-link:hover { text-decoration: underline; }
+.subtitle { color: #64748b; font-size: 1.05rem; margin-bottom: 32px; }
+
+.summary { background: linear-gradient(135deg, #1d4ed8 0%, #4f46e5 100%); color: white; padding: 28px 32px; border-radius: 14px; margin: 20px 0 30px; box-shadow: 0 8px 24px rgba(29,78,216,0.25); }
+.summary-title { font-size: 1rem; opacity: 0.9; margin-bottom: 6px; }
+.summary-price { font-size: 2.6rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; }
+.summary-label { opacity: 0.85; font-size: 0.95rem; margin-top: 8px; }
+
+table.big { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.06); margin: 12px 0; }
+table.big th { background: #0f172a; color: white; padding: 12px 14px; font-size: 0.9rem; text-align: left; font-weight: 600; }
+table.big th.r { text-align: right; }
+table.big td { padding: 12px 14px; border-bottom: 1px solid #e2e8f0; font-size: 0.95rem; }
+table.big td.r { text-align: right; font-variant-numeric: tabular-nums; }
+table.big td.money { font-weight: 600; }
+table.big tr:last-child td { border-bottom: none; }
+table.big tr.total { background: #f1f5f9; font-weight: 700; }
+table.big tr.total td { font-size: 1.05rem; padding: 14px; }
+.col-hub { background: rgba(29, 78, 216, 0.05); }
+.col-direct { background: rgba(5, 150, 105, 0.05); }
+th.col-hub { background: #1d4ed8; }
+th.col-direct { background: #059669; }
+
+.setup { background: #eef1fb; padding: 20px 24px; border-radius: 10px; margin-bottom: 24px; font-size: 0.95rem; color: #1e3a8a; }
+.setup ul { margin: 8px 0 0 0; padding-left: 20px; line-height: 1.9; }
+.warn { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 14px 18px; border-radius: 6px; font-size: 0.95rem; color: #78350f; margin: 20px 0; }
+.win { background: #ecfdf5; border-left: 4px solid #059669; padding: 14px 18px; border-radius: 6px; font-size: 1rem; color: #047857; margin: 20px 0; }
+.footer { margin-top: 40px; padding-top: 24px; border-top: 1px solid #e2e8f0; color: #64748b; font-size: 0.85rem; text-align: center; }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-link">← Zpět na rozcestník</a>
+
+<h1>Srovnání: Pražský hub vs. napřímo z Hodonína</h1>
+<div class="subtitle">Analýza rozvozu <strong>českých regionů 5–9</strong> (146 prodejen) — dvě varianty distribuce</div>
+
+<div class="setup">
+  <strong>Předpoklady výpočtu:</strong>
+  <ul>
+    <li>Rozvoz probíhá v <strong>14denním cyklu</strong> (26 cyklů ročně)</li>
+    <li>Bednička <strong>14,79 kg</strong>, každá prodejna <strong>6 bedniček</strong> = 88,7 kg</li>
+    <li>Sazba rozvozového auta: <strong>4 167 Kč + 6,60 Kč/km</strong></li>
+    <li>Návrat na základnu <strong>každý den</strong> (žádné přespání), den cíl 12 h, strop 14 h</li>
+    <li>Regiony 5–9 = Východní Čechy, Jižní Čechy, Praha+Stř. Čechy, Západní Čechy, Karlovarsko+Sever</li>
+    <li><strong>Morava/Slezsko/Vysočina se neposuzují</strong> — ty jedou vždy z Hodonína</li>
+  </ul>
+</div>
+
+<h2>Varianta A — Přes pražský hub</h2>
+<p style="color: #475569; margin-bottom: 12px;">
+  1× za cyklus <strong>svoz velkým autem</strong> Hodonín → pražský sklad → zpět (~530 km, 22 000 Kč).
+  Odtud pak české prodejny rozváží <strong>dodávka 1 000 kg</strong> (11 prodejen/den).
+  Ke skladu je člověk (skladník) po dobu rozvozu a fixní nájem.
+</p>
+
+<h2>Varianta B — Napřímo z Hodonína</h2>
+<p style="color: #475569; margin-bottom: 12px;">
+  Ke každé české prodejně jede <strong>velké auto z Hodonína</strong> (1 200 kg, 10 prodejen/den)
+  a stejný den se vrací. Žádný pražský sklad. <strong>Pozor:</strong> 15 z 17 dnů překračuje 14h strop
+  — reálně nezvládnutelné bez přespání.
+</p>
+
+<h2>Srovnávací tabulka</h2>
+<table class="big">
+  <thead>
+    <tr>
+      <th rowspan="2">Položka</th>
+      <th class="r col-hub" colspan="2">A · Pražský hub</th>
+      <th class="r col-direct" colspan="2">B · Napřímo Hodonín</th>
+    </tr>
+    <tr>
+      <th class="r col-hub">Za cyklus</th>
+      <th class="r col-hub">Za rok (26×)</th>
+      <th class="r col-direct">Za cyklus</th>
+      <th class="r col-direct">Za rok (26×)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Svoz Hodonín → Praha → Hodonín</td>
+      <td class="r money col-hub">22 000 Kč</td>
+      <td class="r money col-hub">572 000 Kč</td>
+      <td class="r col-direct" style="color:#94a3b8;">—</td>
+      <td class="r col-direct" style="color:#94a3b8;">—</td>
+    </tr>
+    <tr>
+      <td>Rozvoz (dodávka / auto)</td>
+      <td class="r money col-hub">87 375 Kč</td>
+      <td class="r money col-hub">2 271 761 Kč</td>
+      <td class="r money col-direct">147 746 Kč</td>
+      <td class="r money col-direct">3 841 393 Kč</td>
+    </tr>
+    <tr>
+      <td>Skladník (3 500 Kč/den)</td>
+      <td class="r money col-hub">56 000 Kč</td>
+      <td class="r money col-hub">1 456 000 Kč</td>
+      <td class="r col-direct" style="color:#94a3b8;">—</td>
+      <td class="r col-direct" style="color:#94a3b8;">—</td>
+    </tr>
+    <tr>
+      <td>Nájem skladu (11 000 Kč/měs)</td>
+      <td class="r money col-hub">5 500 Kč</td>
+      <td class="r money col-hub">132 000 Kč</td>
+      <td class="r col-direct" style="color:#94a3b8;">—</td>
+      <td class="r col-direct" style="color:#94a3b8;">—</td>
+    </tr>
+    <tr class="total">
+      <td>CELKEM</td>
+      <td class="r money col-hub">170 875 Kč</td>
+      <td class="r money col-hub">4 431 761 Kč</td>
+      <td class="r money col-direct">147 746 Kč</td>
+      <td class="r money col-direct">3 841 393 Kč</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="summary">
+  <div class="summary-title">Rozdíl mezi variantami — za rok</div>
+  <div class="summary-price">−590 368 Kč</div>
+  <div class="summary-label">Pražský hub je o <strong>590 368 Kč/rok</strong> dražší (23 130 Kč/cyklus)</div>
+</div>
+
+<div class="warn">
+  <strong>⚠️ Varianta B má reálný problém:</strong> 15 z 17 dnů překračuje 14h strop. Bez přespání není řešitelné.
+  Když započteme přenocování řidiče (<strong>~15 000 Kč/cyklus</strong>, ~390 000 Kč/rok), rozdíl se sníží
+  na <strong>~200 000 Kč/rok</strong> ve prospěch Hodonína.
+</div>
+
+<h2>Provozní srovnání</h2>
+<table class="big">
+  <thead>
+    <tr>
+      <th>Parametr</th>
+      <th class="r col-hub">A · Pražský hub</th>
+      <th class="r col-direct">B · Napřímo Hodonín</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Auto-dnů rozvozu (za cyklus)</td><td class="r col-hub">16</td><td class="r col-direct">17</td></tr>
+    <tr><td>Ujetých km (za cyklus)</td><td class="r col-hub">3 137 km</td><td class="r col-direct">11 653 km</td></tr>
+    <tr><td>Průměr km/den</td><td class="r col-hub">196 km</td><td class="r col-direct">686 km</td></tr>
+    <tr><td>Dnů přes 14h (problém)</td><td class="r col-hub"><strong>1</strong></td><td class="r col-direct" style="color:#dc2626;"><strong>15</strong></td></tr>
+    <tr><td>Vozový park</td><td class="r col-hub">Dodávka + 1 svoz</td><td class="r col-direct">Velké auto</td></tr>
+    <tr><td>Skladová logistika</td><td class="r col-hub">Vyžaduje sklad + skladník</td><td class="r col-direct">Bez skladu</td></tr>
+  </tbody>
+</table>
+
+<div class="win">
+  <strong>💡 Doporučení:</strong> Přes pražský hub sice ušetří výrazně na km (–8 516 km/cyklus = –73 %) a
+  dnů přes limit, ale <strong>fixní režie skladu a skladníka</strong> udělá tuto variantu dražší.
+  Napřímo z Hodonína je <strong>papírově levnější</strong>, ale <strong>provozně náročnější</strong>
+  (přespání, kolony, řidičské doby, opotřebení auta).
+</div>
+
+<div class="footer">
+  Analýza vychází z 146 českých prodejen (regiony 5–9) · Ceny bez DPH<br>
+  Podklady: skript <code>varianta4_dodavka_praha.py</code> · Ověření skutečných km přes OSRM
+</div>
+
+</body>
+</html>
