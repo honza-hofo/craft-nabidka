@@ -8,8 +8,8 @@
 body { font-family: -apple-system, "Segoe UI", sans-serif; max-width: 1000px; margin: 40px auto; padding: 0 20px; background: #f5f6f8; color: #1c2433; }
 h1 { font-size: 2.1rem; margin: 0 0 6px; color: #0f172a; letter-spacing: -0.02em; }
 h2 { font-size: 1.4rem; margin: 40px 0 16px; color: #1e3a8a; }
-.back-link { display: inline-block; margin-bottom: 20px; color: #1d4ed8; text-decoration: none; font-size: 0.95rem; }
-.back-link:hover { text-decoration: underline; }
+.back-link { display: inline-block; margin-bottom: 20px; padding: 8px 14px; background: #1d4ed8; color: white; text-decoration: none; border-radius: 6px; font-size: 14px; font-weight:600; }
+@media print { .back-link { display: none !important; } }
 .subtitle { color: #64748b; font-size: 1.05rem; margin-bottom: 32px; }
 
 .summary { background: linear-gradient(135deg, #1d4ed8 0%, #4f46e5 100%); color: white; padding: 28px 32px; border-radius: 14px; margin: 20px 0 30px; box-shadow: 0 8px 24px rgba(29,78,216,0.25); }
@@ -50,8 +50,10 @@ th.col-direct { background: #059669; }
   <ul>
     <li>Rozvoz probíhá v <strong>14denním cyklu</strong> (26 cyklů ročně)</li>
     <li>Bednička <strong>14,79 kg</strong>, každá prodejna <strong>6 bedniček</strong> = 88,7 kg</li>
+    <li><strong>Rozvozová dodávka 1 200 kg</strong> (obě varianty stejné) = <strong>81 bedniček / 13 prodejen na nakládku</strong></li>
     <li>Sazba rozvozového auta: <strong>4 167 Kč + 6,60 Kč/km</strong></li>
-    <li>Návrat na základnu <strong>každý den</strong> (žádné přespání), den cíl 12 h, strop 14 h</li>
+    <li>Návrat na základnu <strong>každý den</strong> (žádné přespání), <strong>max 12 h/den</strong></li>
+    <li>Svoz Hodonín→Praha (jen u varianty A) = <strong>náklaďák</strong>, 22 000 Kč/svoz, 1×/cyklus</li>
     <li>Regiony 5–9 = Východní Čechy, Jižní Čechy, Praha+Stř. Čechy, Západní Čechy, Karlovarsko+Sever</li>
     <li><strong>Morava/Slezsko/Vysočina se neposuzují</strong> — ty jedou vždy z Hodonína</li>
   </ul>
@@ -59,16 +61,17 @@ th.col-direct { background: #059669; }
 
 <h2>Varianta A — Přes pražský hub</h2>
 <p style="color: #475569; margin-bottom: 12px;">
-  1× za cyklus <strong>svoz velkým autem</strong> Hodonín → pražský sklad → zpět (~530 km, 22 000 Kč).
-  Odtud pak české prodejny rozváží <strong>dodávka 1 000 kg</strong> (11 prodejen/den).
+  1× za cyklus <strong>svoz náklaďákem</strong> Hodonín → pražský sklad → zpět (~530 km, 22 000 Kč).
+  Odtud pak české prodejny rozváží <strong>dodávka 1 200 kg</strong> (13 prodejen/den).
   Ke skladu je člověk (skladník) po dobu rozvozu a fixní nájem.
 </p>
 
 <h2>Varianta B — Napřímo z Hodonína</h2>
 <p style="color: #475569; margin-bottom: 12px;">
-  Ke každé české prodejně jede <strong>velké auto z Hodonína</strong> (1 200 kg, 10 prodejen/den)
-  a stejný den se vrací. Žádný pražský sklad. <strong>Pozor:</strong> 15 z 17 dnů překračuje 14h strop
-  — reálně nezvládnutelné bez přespání.
+  Ke každé české prodejně jede <strong>stejná dodávka 1 200 kg</strong> přímo z Hodonína
+  a stejný den se vrací (max 12 h). Bez pražského skladu.
+  <strong>Problém:</strong> vzdálené destinace (Karlovarsko, Sokolov, Cheb) jsou 400+ km od Hodonína,
+  takže i s plnou nakládkou stihne auto jen 1–2 prodejny denně (round trip vyčerpá celý denní strop).
 </p>
 
 <h2>Srovnávací tabulka</h2>
@@ -88,23 +91,23 @@ th.col-direct { background: #059669; }
   </thead>
   <tbody>
     <tr>
-      <td>Svoz Hodonín → Praha → Hodonín</td>
+      <td>Svoz Hodonín → Praha → Hodonín (náklaďák)</td>
       <td class="r money col-hub">22 000 Kč</td>
       <td class="r money col-hub">572 000 Kč</td>
       <td class="r col-direct" style="color:#94a3b8;">—</td>
       <td class="r col-direct" style="color:#94a3b8;">—</td>
     </tr>
     <tr>
-      <td>Rozvoz (dodávka / auto)</td>
-      <td class="r money col-hub">87 375 Kč</td>
-      <td class="r money col-hub">2 271 761 Kč</td>
-      <td class="r money col-direct">147 746 Kč</td>
-      <td class="r money col-direct">3 841 393 Kč</td>
+      <td>Rozvoz dodávkou</td>
+      <td class="r money col-hub">93 918 Kč</td>
+      <td class="r money col-hub">2 441 866 Kč</td>
+      <td class="r money col-direct">1 050 024 Kč</td>
+      <td class="r money col-direct">27 300 635 Kč</td>
     </tr>
     <tr>
-      <td>Skladník (3 500 Kč/den)</td>
-      <td class="r money col-hub">56 000 Kč</td>
-      <td class="r money col-hub">1 456 000 Kč</td>
+      <td>Skladník (3 500 Kč/den × dní rozvozu)</td>
+      <td class="r money col-hub">59 500 Kč</td>
+      <td class="r money col-hub">1 547 000 Kč</td>
       <td class="r col-direct" style="color:#94a3b8;">—</td>
       <td class="r col-direct" style="color:#94a3b8;">—</td>
     </tr>
@@ -117,24 +120,25 @@ th.col-direct { background: #059669; }
     </tr>
     <tr class="total">
       <td>CELKEM</td>
-      <td class="r money col-hub">170 875 Kč</td>
-      <td class="r money col-hub">4 431 761 Kč</td>
-      <td class="r money col-direct">147 746 Kč</td>
-      <td class="r money col-direct">3 841 393 Kč</td>
+      <td class="r money col-hub">180 918 Kč</td>
+      <td class="r money col-hub">4 692 872 Kč</td>
+      <td class="r money col-direct">1 050 024 Kč</td>
+      <td class="r money col-direct">27 300 635 Kč</td>
     </tr>
   </tbody>
 </table>
 
 <div class="summary">
   <div class="summary-title">Rozdíl mezi variantami — za rok</div>
-  <div class="summary-price">−590 368 Kč</div>
-  <div class="summary-label">Pražský hub je o <strong>590 368 Kč/rok</strong> dražší (23 130 Kč/cyklus)</div>
+  <div class="summary-price">−22 607 763 Kč</div>
+  <div class="summary-label"><strong>Pražský hub</strong> je o <strong>22 607 763 Kč/rok</strong> levnější (869 106 Kč/cyklus)</div>
 </div>
 
 <div class="warn">
-  <strong>⚠️ Varianta B má reálný problém:</strong> 15 z 17 dnů překračuje 14h strop. Bez přespání není řešitelné.
-  Když započteme přenocování řidiče (<strong>~15 000 Kč/cyklus</strong>, ~390 000 Kč/rok), rozdíl se sníží
-  na <strong>~200 000 Kč/rok</strong> ve prospěch Hodonína.
+  <strong>⚠️ Proč tak enormní rozdíl?</strong> Napřímo z Hodonína pro české regiony <strong>není reálné s limitem 12 h/den</strong>.
+  Vzdálené destinace (Cheb ~450 km, Karlovy Vary ~410 km) mají round trip Hodonín ↔ město ~800–900 km =
+  <strong>12+ h čisté jízdy</strong>. Ve dni pak stihne auto <strong>jen 1–2 prodejny</strong> (denní strop vyčerpán přejezdy).
+  Výsledek: <strong>124 auto-dnů</strong> namísto obvyklých 15–20. Cena raketově roste.
 </div>
 
 <h2>Provozní srovnání</h2>
@@ -147,25 +151,25 @@ th.col-direct { background: #059669; }
     </tr>
   </thead>
   <tbody>
-    <tr><td>Auto-dnů rozvozu (za cyklus)</td><td class="r col-hub">16</td><td class="r col-direct">17</td></tr>
-    <tr><td>Ujetých km (za cyklus)</td><td class="r col-hub">3 137 km</td><td class="r col-direct">11 653 km</td></tr>
-    <tr><td>Průměr km/den</td><td class="r col-hub">196 km</td><td class="r col-direct">686 km</td></tr>
-    <tr><td>Dnů přes 14h (problém)</td><td class="r col-hub"><strong>1</strong></td><td class="r col-direct" style="color:#dc2626;"><strong>15</strong></td></tr>
-    <tr><td>Vozový park</td><td class="r col-hub">Dodávka + 1 svoz</td><td class="r col-direct">Velké auto</td></tr>
+    <tr><td>Auto-dnů rozvozu (za cyklus)</td><td class="r col-hub">17</td><td class="r col-direct" style="color:#dc2626"><strong>124</strong></td></tr>
+    <tr><td>Ujetých km (za cyklus)</td><td class="r col-hub">3 497 km</td><td class="r col-direct" style="color:#dc2626">80 806 km</td></tr>
+    <tr><td>Průměr km/den</td><td class="r col-hub">206 km</td><td class="r col-direct">652 km</td></tr>
+    <tr><td>Dnů přes 12 h (nesplněno)</td><td class="r col-hub"><strong>0</strong></td><td class="r col-direct" style="color:#dc2626">0 (algoritmus dní dosáhl limitu jen krácením prodejen na den)</td></tr>
+    <tr><td>Vozidlo</td><td class="r col-hub">Dodávka 1 200 kg + 1 svoz náklaďákem</td><td class="r col-direct">Dodávka 1 200 kg (stejná)</td></tr>
     <tr><td>Skladová logistika</td><td class="r col-hub">Vyžaduje sklad + skladník</td><td class="r col-direct">Bez skladu</td></tr>
   </tbody>
 </table>
 
 <div class="win">
-  <strong>💡 Doporučení:</strong> Přes pražský hub sice ušetří výrazně na km (–8 516 km/cyklus = –73 %) a
-  dnů přes limit, ale <strong>fixní režie skladu a skladníka</strong> udělá tuto variantu dražší.
-  Napřímo z Hodonína je <strong>papírově levnější</strong>, ale <strong>provozně náročnější</strong>
-  (přespání, kolony, řidičské doby, opotřebení auta).
+  <strong>💡 Závěr:</strong> Pro pravidelný rozvoz českých regionů z Hodonína je <strong>fyzicky nezvládnutelné</strong>
+  respektovat 12h denní limit. Pražský hub (varianta A) je <strong>jedinou realistickou volbou</strong> pro Čechy —
+  ušetří <strong>22.6 mil Kč/rok</strong>, sníží km o 95 % a udrží řidiče v zákonných normách.
 </div>
 
 <div class="footer">
   Analýza vychází z 146 českých prodejen (regiony 5–9) · Ceny bez DPH<br>
-  Podklady: skript <code>varianta4_dodavka_praha.py</code> · Ověření skutečných km přes OSRM
+  Kapacita dodávky: 1 200 kg = 81 bedniček = 13 prodejen/den · Limit 12 h/den<br>
+  Podklady: skript <code>varianta4_dodavka_praha.py</code>
 </div>
 
 </body>
